@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.6.3"
 
+gem "apartment", github: 'influitive/apartment', branch: 'development'
+gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "jbuilder", "~> 2.7"
 gem "pg", ">= 0.18", "< 2.0"

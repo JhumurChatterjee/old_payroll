@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_12_063939) do
+ActiveRecord::Schema.define(version: 2019_10_12_152516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,4 +21,14 @@ ActiveRecord::Schema.define(version: 2019_10_12_063939) do
     t.string "password", limit: 250
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name", limit: 250, null: false
+    t.string "email", limit: 250, null: false
+    t.string "password_digest", limit: 250, null: false
+    t.bigint "organization_id"
+    t.boolean "admin", default: false
+    t.index ["organization_id"], name: "index_users_on_organization_id"
+  end
+
+  add_foreign_key "users", "organizations"
 end
