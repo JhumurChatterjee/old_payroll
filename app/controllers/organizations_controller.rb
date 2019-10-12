@@ -10,8 +10,9 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(organization_params)
 
     if @organization.save
+      OrganizationMailer.with(organization: @organization).welcome_email.deliver_now!
       flash[:notice] = "Email Sent !!!"
-      redirect_to organizations_path
+      redirect_to root_path
     else
       render "new"
     end
@@ -20,6 +21,6 @@ class OrganizationsController < ApplicationController
   private
 
   def organization_params
-    params.require(:organization).permit(:name, :email)
+    params.require(:organizations).permit(:name, :email)
   end
 end
